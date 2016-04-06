@@ -1,6 +1,10 @@
-# Idfk
+# Idfk / I Don't Frikkin' Know
 
-**TODO: Add description**
+The library of chunks of code that didn't clearly belong anywhere else.
+
+Developer1:  "Where should we put this chucnk of code?"
+Developer2:  "I don't frikkin' know."
+Developer1:  "That's a great idea!"
 
 ## Installation
 
@@ -17,4 +21,3 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
         def application do
           [applications: [:idfk]]
         end
-
