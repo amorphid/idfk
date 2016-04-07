@@ -12,6 +12,10 @@ defmodule Idfk.DateTime do
     seconds - posix_epoch_in_seconds
   end
 
+  def gregorian_to_posix(invalid) do
+    raise "Invalid arguments: #{inspect invalid}"
+  end
+
   @doc """
   The datetime 1 Jan 1970 @ 12:00 a.m. in seconds.  Hard coded for performance reasons.
 
@@ -24,25 +28,47 @@ defmodule Idfk.DateTime do
   end
 
   @doc """
-  Converts a date_time tuple with millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC.
+  Converts a date_time tuple with second or millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC.
 
-      # Example
+      # second precision
+      iex> to_iso8601({{2016,4,6},{16,12,35}})
+      {:ok, "2016-04-06T16:12:35+00:00"}
+
+      # millisecond precision
       iex> to_iso8601({{2016,4,6},{16,12,35,123}})
       {:ok, "2016-04-06T16:12:35.123+00:00"}
   """
   def to_iso8601({{y,mon,d},{h,min,s,mil}}) do
-    DateTime.from({{y,mon,d},{h,min,s,mil}})
-    |> Timex.format("{ISO:Extended}")
+    case DateTime.from({{y,mon,d},{h,min,s,mil}}) do
+      {:error, reason} ->
+        {:error, reason}
+      date_time ->
+        Timex.format(date_time, "{ISO:Extended}")
+    end
   end
 
-  @doc """
-  Converts a date_time tuple with second precision to an iso8601 formatted string within a tuple.  Assumes input is UTC.
-
-      # Example
-      iex> to_iso8601({{2016,4,6},{16,12,35}})
-      {:ok, "2016-04-06T16:12:35+00:00"}
-  """
   def to_iso8601({{y,mon,d}, {h,min,s}}) do
     to_iso8601({{y,mon,d},{h,min,s,0}})
+  end
+
+  def to_iso8601(invalid) do
+    raise "Invalid arguments: #{inspect invalid}"
+  end
+
+
+  @doc """
+  Similar to `to_iso8601`, but it returns `date_as_string` instead of `{:ok, date_as_string}`.  Raises an exception is there's an error.
+
+      # returns a string, not a tuple
+      iex> to_iso8601!({{2016,4,6},{16,12,35}})
+      "2016-04-06T16:12:35+00:00"
+  """
+  def to_iso8601!(tuple) when is_tuple(tuple) do
+    case to_iso8601(tuple) do
+      {:error, reason} ->
+        raise reason
+      {:ok, date_time} ->
+        date_time
+    end
   end
 end
