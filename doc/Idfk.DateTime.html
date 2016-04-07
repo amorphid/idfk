@@ -76,6 +76,73 @@
             Summary
           </h1>
           
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:date_time/0">date_time()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:datetime_millis_precision/0">datetime_millis_precision()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:datetime_second_precision/0">datetime_second_precision()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:day/0">day()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:hours/0">hours()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:milliseconds/0">milliseconds()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:minutes/0">minutes()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:month/0">month()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:seconds/0">seconds()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:year/0">year()</a>
+  </div>
+  
+</div>
+
+  </div>
+
 
           
   <div class="summary-functions summary">
@@ -102,7 +169,7 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#to_iso8601/1">to_iso8601(invalid)</a>
+    <a href="#to_iso8601/1">to_iso8601(date_time)</a>
   </div>
   
     <div class="summary-synopsis"><p>Converts a date_time tuple with second or millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC</p>
@@ -111,7 +178,7 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#to_iso8601!/1">to_iso8601!(tuple)</a>
+    <a href="#to_iso8601!/1">to_iso8601!(date_time)</a>
   </div>
   
     <div class="summary-synopsis"><p>Similar to <code class="inline">to_iso8601</code>, but it returns <code class="inline">date_as_string</code> instead of <code class="inline">{:ok, date_as_string}</code>.  Raises an exception is there’s an error</p>
@@ -129,6 +196,60 @@
         </section>
       
 
+      
+        <section id="types" class="types details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <i class="icon-link"></i>
+            </a>
+            Types
+          </h1>
+          <div class="types-list">
+            <div id="t:date_time/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:date_time/0">date_time</a> ::
+  <a href="#t:datetime_second_precision/0">datetime_second_precision</a> |
+  <a href="#t:datetime_millis_precision/0">datetime_millis_precision</a></code></pre>
+  
+</div>
+<div id="t:datetime_millis_precision/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:datetime_millis_precision/0">datetime_millis_precision</a> :: {{<a href="#t:year/0">year</a>, <a href="#t:month/0">month</a>, <a href="#t:day/0">day</a>}, {<a href="#t:hours/0">hours</a>, <a href="#t:minutes/0">minutes</a>, <a href="#t:seconds/0">seconds</a>, <a href="#t:milliseconds/0">milliseconds</a>}}</code></pre>
+  
+</div>
+<div id="t:datetime_second_precision/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:datetime_second_precision/0">datetime_second_precision</a> :: {{<a href="#t:year/0">year</a>, <a href="#t:month/0">month</a>, <a href="#t:day/0">day</a>}, {<a href="#t:hours/0">hours</a>, <a href="#t:minutes/0">minutes</a>, <a href="#t:seconds/0">seconds</a>}}</code></pre>
+  
+</div>
+<div id="t:day/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:day/0">day</a> :: integer</code></pre>
+  
+</div>
+<div id="t:hours/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:hours/0">hours</a> :: integer</code></pre>
+  
+</div>
+<div id="t:milliseconds/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:milliseconds/0">milliseconds</a> :: integer</code></pre>
+  
+</div>
+<div id="t:minutes/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:minutes/0">minutes</a> :: integer</code></pre>
+  
+</div>
+<div id="t:month/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:month/0">month</a> :: integer</code></pre>
+  
+</div>
+<div id="t:seconds/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:seconds/0">seconds</a> :: integer</code></pre>
+  
+</div>
+<div id="t:year/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:year/0">year</a> :: integer</code></pre>
+  
+</div>
+
+          </div>
+        </section>
       
 
       
@@ -148,6 +269,15 @@
       
   </div>
   
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">gregorian_to_posix(integer) :: integer</code></pre>
+        
+      </div>
+    </div>
+  
   <section class="docstring">
     <p>Converts an integer formatted date_time based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m. to an integer formatted date_time based on the posix epoch of  1 Jan 1970 @ 12:00 a.m.</p>
 <pre><code class="iex elixir">iex&gt; Idfk.posix_epoch_in_seconds(63627199062)
@@ -164,6 +294,15 @@
       
   </div>
   
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">posix_epoch_in_seconds :: integer</code></pre>
+        
+      </div>
+    </div>
+  
   <section class="docstring">
     <p>The datetime 1 Jan 1970 @ 12:00 a.m. in seconds.  Hard coded for performance reasons.</p>
 <pre><code class="elixir"># same as this scenario
@@ -177,9 +316,24 @@ iex&gt; :calendar.datetime_to_gregorian_seconds({{1970,1,1},{0,0,0}})
     <a href="#to_iso8601/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">to_iso8601(invalid)</span>
+    <span class="signature">to_iso8601(date_time)</span>
       
   </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">to_iso8601({{<a href="#t:year/0">year</a>, <a href="#t:month/0">month</a>, <a href="#t:day/0">day</a>}, {<a href="#t:hours/0">hours</a>, <a href="#t:minutes/0">minutes</a>, <a href="#t:seconds/0">seconds</a>}}) ::
+  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>} |
+  {:error, term}</code></pre>
+        
+          <pre><code class="elixir">to_iso8601({{<a href="#t:year/0">year</a>, <a href="#t:month/0">month</a>, <a href="#t:day/0">day</a>}, {<a href="#t:hours/0">hours</a>, <a href="#t:minutes/0">minutes</a>, <a href="#t:seconds/0">seconds</a>, <a href="#t:milliseconds/0">milliseconds</a>}}) ::
+  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>} |
+  {:error, term}</code></pre>
+        
+      </div>
+    </div>
   
   <section class="docstring">
     <p>Converts a date_time tuple with second or millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC.</p>
@@ -198,14 +352,22 @@ iex&gt; Idfk.to_iso8601({{2016,4,6},{16,12,35,123}})
     <a href="#to_iso8601!/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">to_iso8601!(tuple)</span>
+    <span class="signature">to_iso8601!(date_time)</span>
       
   </div>
   
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">to_iso8601!(<a href="#t:date_time/0">date_time</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
+        
+      </div>
+    </div>
+  
   <section class="docstring">
     <p>Similar to <code class="inline">to_iso8601</code>, but it returns <code class="inline">date_as_string</code> instead of <code class="inline">{:ok, date_as_string}</code>.  Raises an exception is there’s an error.</p>
-<pre><code class="elixir"># returns a string, not a tuple
-iex&gt; Idfk.to_iso8601!({{2016,4,6},{16,12,35}})
+<pre><code class="iex elixir">iex&gt; Idfk.to_iso8601!({{2016,4,6},{16,12,35}})
 &quot;2016-04-06T16:12:35+00:00&quot;</code></pre>
 
   </section>
