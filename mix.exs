@@ -16,7 +16,9 @@ defmodule Idfk.Mixfile do
 
   defp deps do
     [
+      {:earmark, "~> 0.1", only: :dev},
       {:espec, "~> 0.8.17", only: :test},
+      {:ex_doc, "~> 0.11", only: :dev},
       {:timex, "~> 2.1.4"}
     ]
   end

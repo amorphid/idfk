@@ -2,7 +2,7 @@ defmodule Idfk.DateTime do
   use Timex
 
   @doc """
-  Converts an integer formatted date_time based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m., and you need an integer formatted date_time based on the posix epoch of  1 Jan 1970 @ 12:00 a.m.
+  Converts an integer formatted date_time based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m. to an integer formatted date_time based on the posix epoch of  1 Jan 1970 @ 12:00 a.m.
 
       # same as this scenario
       iex> posix_epoch_in_seconds(63627199062)

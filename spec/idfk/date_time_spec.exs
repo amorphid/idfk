@@ -25,7 +25,6 @@ defmodule Idfk.DateTimeSpec do
     end
   end
 
-
   context "#to_iso8601!" do
     it "returns string" do
       date   = {{2016,4,6},{16,12,35,123}}

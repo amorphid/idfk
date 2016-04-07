@@ -1,0 +1,240 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.11.4">
+    <title>Idfk.DateTime – idfk v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
+    <script src="dist/sidebar_items.js"></script>
+  </head>
+  <body data-type="modules">
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+  <button class="sidebar-toggle">
+    <i class="icon-menu"></i>
+  </button>
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        idfk
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+
+  <ul id="full-list" class="sidebar-fullList"></ul>
+  <div class="sidebar-noResults"></div>
+</section>
+
+<section class="content">
+  <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">idfk v0.0.1</small>
+        Idfk.DateTime
+        
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#gregorian_to_posix/1">gregorian_to_posix(seconds)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts an integer formatted date_time based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m., and you need an integer formatted date_time based on the posix epoch of  1 Jan 1970 @ 12:00 a.m</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#posix_epoch_in_seconds/0">posix_epoch_in_seconds()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The datetime 1 Jan 1970 @ 12:00 a.m. in seconds.  Hard coded for performance reasons</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_iso8601/1">to_iso8601(invalid)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts a date_time tuple with second or millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_iso8601!/1">to_iso8601!(tuple)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Similar to <code class="inline">to_iso8601</code>, but it returns <code class="inline">date_as_string</code> instead of <code class="inline">{:ok, date_as_string}</code>.  Raises an exception is there’s an error</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="gregorian_to_posix/1">
+  <div class="detail-header">
+    <a href="#gregorian_to_posix/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">gregorian_to_posix(seconds)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Converts an integer formatted date_time based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m., and you need an integer formatted date_time based on the posix epoch of  1 Jan 1970 @ 12:00 a.m.</p>
+<pre><code class="elixir"># same as this scenario
+iex&gt; posix_epoch_in_seconds(63627199062)
+1459979862</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="posix_epoch_in_seconds/0">
+  <div class="detail-header">
+    <a href="#posix_epoch_in_seconds/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">posix_epoch_in_seconds()</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>The datetime 1 Jan 1970 @ 12:00 a.m. in seconds.  Hard coded for performance reasons.</p>
+<pre><code class="elixir"># same as this scenario
+iex&gt; :calendar.datetime_to_gregorian_seconds({{1970,1,1},{0,0,0}})
+62167219200</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="to_iso8601/1">
+  <div class="detail-header">
+    <a href="#to_iso8601/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">to_iso8601(invalid)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Converts a date_time tuple with second or millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC.</p>
+<pre><code class="elixir"># second precision
+iex&gt; to_iso8601({{2016,4,6},{16,12,35}})
+{:ok, &quot;2016-04-06T16:12:35+00:00&quot;}
+
+# millisecond precision
+iex&gt; to_iso8601({{2016,4,6},{16,12,35,123}})
+{:ok, &quot;2016-04-06T16:12:35.123+00:00&quot;}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="to_iso8601!/1">
+  <div class="detail-header">
+    <a href="#to_iso8601!/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">to_iso8601!(tuple)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Similar to <code class="inline">to_iso8601</code>, but it returns <code class="inline">date_as_string</code> instead of <code class="inline">{:ok, date_as_string}</code>.  Raises an exception is there’s an error.</p>
+<pre><code class="elixir"># returns a string, not a tuple
+iex&gt; to_iso8601!({{2016,4,6},{16,12,35}})
+&quot;2016-04-06T16:12:35+00:00&quot;</code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+        <footer class="footer">
+      <p>
+        <span class="line">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.4),
+        </span>
+        <span class="line">
+          designed by
+          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+      </p>
+      <button class="night-mode-toggle" />
+    </footer>
+  </div>
+</section>
+</div>
+  <script src="dist/app-6d2e071366.js"></script>
+  </body>
+</html>
+
