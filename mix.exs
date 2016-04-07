@@ -16,7 +16,8 @@ defmodule Idfk.Mixfile do
 
   defp deps do
     [
-      {:espec, "~> 0.8.17", only: :test}
+      {:espec, "~> 0.8.17", only: :test},
+      {:timex, "~> 2.1.4"}
     ]
   end
 end
