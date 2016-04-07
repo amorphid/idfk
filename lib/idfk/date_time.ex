@@ -13,7 +13,7 @@ defmodule Idfk.DateTime do
   end
 
   def gregorian_to_posix(invalid) do
-    raise "Invalid arguments: #{inspect invalid}"
+    Idkf.raise_invalid_arg!(invalid)
   end
 
   @doc """
@@ -52,7 +52,7 @@ defmodule Idfk.DateTime do
   end
 
   def to_iso8601(invalid) do
-    raise "Invalid arguments: #{inspect invalid}"
+    Idkf.raise_invalid_arg!(invalid)
   end
 
 
