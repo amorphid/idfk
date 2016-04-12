@@ -6,6 +6,10 @@ The library of Elixir chunks of code that didn't clearly belong anywhere else.
 * Developer2:  "I don't frikkin' know."
 * Developer1:  "That's a great idea!"
 
+## Documentation
+
+Published on [Hex.pm](https://hexdocs.pm/idfk/api-reference.html)
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
