@@ -16,16 +16,33 @@ defmodule Idfk.DateTime do
   @type year :: integer
 
   @doc """
+  A wrapper method around `:calendar.universal_time`.  It's difficult to mock methods on `:calendar`, and it's easy to mock this method.
+
+      # this generates an error when running an ESpec test suite
+      # Error looks something like this:
+      # 12:16:46.292 [error] Can't load module ':calendar' that resides in sticky dir
+      before do: allow :calendar |> to(accept :universal_time,
+                                    fn -> {{2016, 4, 12}, {21, 8, 31}} end)
+
+      # this works like a charm!
+      before do: allow Idfk.DateTime |> to(accept :datetime,
+                                        fn -> {{2016, 4, 12}, {21, 8, 31}} end)
+  """
+  @spec datetime :: datetime
+  def datetime do
+    :calendar.universal_time
+  end
+
+  @doc """
   Returns the datetime with milliseconds.  Even though method has arity of 2, arguments are only used for testing purposes.
 
       # Normally you'll simply call without arguments
       Idfk.DateTime.datetime_with_milliseconds
   """
-  @spec datetime_with_milliseconds(datetime_second_precision, timestamp) :: datetime_millis_precision
-  def datetime_with_milliseconds(datetime  \\ :calendar.universal_time,
-                                 timestamp \\ :os.timestamp) do
-    {{y,mon,d},{h,min,s}} = datetime
-    {_,_,mic} = timestamp
+  @spec datetime_with_milliseconds :: datetime_millis_precision
+  def datetime_with_milliseconds do
+    {{y,mon,d},{h,min,s}} = Idfk.DateTime.datetime
+    {_,_,mic} = Idfk.DateTime.timestamp
     mil = div(mic, 1000)
     {{y,mon,d},{h,min,s,mil}}
   end
@@ -57,6 +74,24 @@ defmodule Idfk.DateTime do
   @spec posix_epoch_in_seconds :: integer
   def posix_epoch_in_seconds do
     62167219200
+  end
+
+  @doc """
+  A wrapper method around `:os.timestamp`.  It's difficult to mock methods on `:os`, and it's easy to mock this method.
+
+      # this generates an error when running an ESpec test suite
+      # Error looks something like this:
+      # 12:16:46.292 [error] Can't load module ':os' that resides in sticky dir
+      before do: allow :os |> to(accept :timestamp,
+                              fn -> {1460, 495583, 776409} end)
+
+      # this works like a charm!
+      before do: allow Idfk.DateTime |> to(accept :timestamp,
+                                        fn -> {{1460, 495583, 776409} end)
+  """
+  @spec timestamp :: timestamp
+  def timestamp do
+    :os.timestamp
   end
 
   @doc """

@@ -169,7 +169,16 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#datetime_with_milliseconds/2">datetime_with_milliseconds(datetime \\ :calendar.universal_time(), timestamp \\ :os.timestamp())</a>
+    <a href="#datetime/0">datetime()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A wrapper method around <code class="inline">:calendar.universal_time</code>.  It’s difficult to mock methods on <code class="inline">:calendar</code>, and it’s easy to mock this method</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#datetime_with_milliseconds/0">datetime_with_milliseconds()</a>
   </div>
   
     <div class="summary-synopsis"><p>Returns the datetime with milliseconds.  Even though method has arity of 2, arguments are only used for testing purposes</p>
@@ -191,6 +200,15 @@
   </div>
   
     <div class="summary-synopsis"><p>The datetime 1 Jan 1970 @ 12:00 a.m. in seconds.  Hard coded for performance reasons</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#timestamp/0">timestamp()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A wrapper method around <code class="inline">:os.timestamp</code>.  It’s difficult to mock methods on <code class="inline">:os</code>, and it’s easy to mock this method</p>
 </div>
   
 </div>
@@ -299,12 +317,12 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="datetime_with_milliseconds/2">
+          <div class="detail" id="datetime/0">
   <div class="detail-header">
-    <a href="#datetime_with_milliseconds/2" class="detail-link" title="Link to this function">
+    <a href="#datetime/0" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">datetime_with_milliseconds(datetime \\ :calendar.universal_time(), timestamp \\ :os.timestamp())</span>
+    <span class="signature">datetime()</span>
       
   </div>
   
@@ -312,7 +330,39 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">datetime_with_milliseconds(<a href="#t:datetime_second_precision/0">datetime_second_precision</a>, <a href="#t:timestamp/0">timestamp</a>) :: <a href="#t:datetime_millis_precision/0">datetime_millis_precision</a></code></pre>
+          <pre><code class="elixir"><a href="#t:datetime/0">datetime</a> :: <a href="#t:datetime/0">datetime</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>A wrapper method around <code class="inline">:calendar.universal_time</code>.  It’s difficult to mock methods on <code class="inline">:calendar</code>, and it’s easy to mock this method.</p>
+<pre><code class="elixir"># this generates an error when running an ESpec test suite
+# Error looks something like this:
+# 12:16:46.292 [error] Can&#39;t load module &#39;:calendar&#39; that resides in sticky dir
+before do: allow :calendar |&gt; to(accept :universal_time,
+                              fn -&gt; {{2016, 4, 12}, {21, 8, 31}} end)
+
+# this works like a charm!
+before do: allow Idfk.DateTime |&gt; to(accept :datetime,
+                                  fn -&gt; {{2016, 4, 12}, {21, 8, 31}} end)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="datetime_with_milliseconds/0">
+  <div class="detail-header">
+    <a href="#datetime_with_milliseconds/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">datetime_with_milliseconds()</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">datetime_with_milliseconds :: <a href="#t:datetime_millis_precision/0">datetime_millis_precision</a></code></pre>
         
       </div>
     </div>
@@ -372,6 +422,38 @@ Idfk.DateTime.datetime_with_milliseconds</code></pre>
 <pre><code class="elixir"># same as this scenario
 iex&gt; :calendar.datetime_to_gregorian_seconds({{1970,1,1},{0,0,0}})
 62167219200</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="timestamp/0">
+  <div class="detail-header">
+    <a href="#timestamp/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">timestamp()</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir"><a href="#t:timestamp/0">timestamp</a> :: <a href="#t:timestamp/0">timestamp</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>A wrapper method around <code class="inline">:os.timestamp</code>.  It’s difficult to mock methods on <code class="inline">:os</code>, and it’s easy to mock this method.</p>
+<pre><code class="elixir"># this generates an error when running an ESpec test suite
+# Error looks something like this:
+# 12:16:46.292 [error] Can&#39;t load module &#39;:os&#39; that resides in sticky dir
+before do: allow :os |&gt; to(accept :timestamp,
+                        fn -&gt; {1460, 495583, 776409} end)
+
+# this works like a charm!
+before do: allow Idfk.DateTime |&gt; to(accept :timestamp,
+                                  fn -&gt; {{1460, 495583, 776409} end)</code></pre>
 
   </section>
 </div>

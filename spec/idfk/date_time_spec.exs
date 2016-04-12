@@ -5,11 +5,13 @@ defmodule Idfk.DateTimeSpec do
 
   subject do: Idfk.DateTime
 
+  before do: allow Idfk.DateTime |> to(accept :datetime,
+                                    fn -> {{2016, 4, 12}, {19, 11, 51}} end)
+  before do: allow Idfk.DateTime |> to(accept :timestamp,
+                                    fn -> {1460, 488396, 730374} end)
   context "#datetime_with_milliseconds" do
     it "returns a tuple of integers" do
-      datetime = {{2016, 4, 12}, {19, 11, 51}}
-      timestamp = {1460, 488396, 730374}
-      result = subject.datetime_with_milliseconds(datetime, timestamp)
+      result = subject.datetime_with_milliseconds
       expect result |> to(eq {{2016, 4, 12}, {19, 11, 51, 730}})
     end
   end
