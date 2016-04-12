@@ -1,31 +1,49 @@
 defmodule Idfk.DateTime do
   use Timex
 
-  @type year :: integer
-  @type month :: integer
+  @type datetime :: datetime_second_precision | datetime_millis_precision
+  @type datetime_millis_precision :: {{year, month, day}, {hours, minutes, seconds, milliseconds}}
+  @type datetime_second_precision :: {{year, month, day}, {hours, minutes, seconds}}
   @type day :: integer
   @type hours :: integer
-  @type minutes :: integer
-  @type seconds :: integer
+  @type megaseconds :: integer
+  @type microseconds :: integer
   @type milliseconds :: integer
-  @type datetime_second_precision :: {{year, month, day}, {hours, minutes, seconds}}
-  @type datetime_millis_precision :: {{year, month, day}, {hours, minutes, seconds, milliseconds}}
-  @type date_time :: datetime_second_precision | datetime_millis_precision
+  @type minutes :: integer
+  @type month :: integer
+  @type seconds :: integer
+  @type timestamp :: {megaseconds, seconds, microseconds}
+  @type year :: integer
 
   @doc """
-  Converts an integer formatted date_time based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m. to an integer formatted date_time based on the posix epoch of  1 Jan 1970 @ 12:00 a.m.
+  Returns the datetime with milliseconds.  Even though method has arity of 2, arguments are only used for testing purposes.
+
+      # Normally you'll simply call without arguments
+      Idfk.DateTime.datetime_with_milliseconds
+  """
+  @spec datetime_with_milliseconds(datetime_second_precision, timestamp) :: datetime_millis_precision
+  def datetime_with_milliseconds(datetime  \\ :calendar.universal_time,
+                                 timestamp \\ :os.timestamp) do
+    {{y,mon,d},{h,min,s}} = datetime
+    {_,_,mic} = timestamp
+    mil = div(mic, 1000)
+    {{y,mon,d},{h,min,s,mil}}
+  end
+
+  @doc """
+  Converts an integer formatted datetime based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m. to an integer formatted datetime based on the posix epoch of  1 Jan 1970 @ 12:00 a.m.
 
       iex> Idfk.posix_epoch_in_seconds(63627199062)
       1459979862
   """
-  @spec gregorian_to_posix(integer) :: integer
-  def gregorian_to_posix(seconds)
+  @spec gregorian_seconds_to_posix_seconds(integer) :: integer
+  def gregorian_seconds_to_posix_seconds(seconds)
 
-  def gregorian_to_posix(seconds) when is_integer(seconds) do
+  def gregorian_seconds_to_posix_seconds(seconds) when is_integer(seconds) do
     seconds - posix_epoch_in_seconds
   end
 
-  def gregorian_to_posix(invalid) do
+  def gregorian_seconds_to_posix_seconds(invalid) do
     Idkf.raise_invalid_arg!(invalid)
   end
 
@@ -42,7 +60,7 @@ defmodule Idfk.DateTime do
   end
 
   @doc """
-  Converts a date_time tuple with second or millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC.
+  Converts a datetime tuple with second or millisecond precision to an iso8601 formatted string within a tuple.  Assumes input is UTC.
 
       # second precision
       iex> Idfk.to_iso8601({{2016,4,6},{16,12,35}})
@@ -52,15 +70,15 @@ defmodule Idfk.DateTime do
       iex> Idfk.to_iso8601({{2016,4,6},{16,12,35,123}})
       {:ok, "2016-04-06T16:12:35.123+00:00"}
   """
-  def to_iso8601(date_time)
+  def to_iso8601(datetime)
 
   @spec to_iso8601({{year, month, day}, {hours, minutes, seconds, milliseconds}}) :: {:ok, String.t} | {:error, term}
   def to_iso8601({{y,mon,d},{h,min,s,mil}}) do
     case DateTime.from({{y,mon,d},{h,min,s,mil}}) do
       {:error, reason} ->
         {:error, reason}
-      date_time ->
-        Timex.format(date_time, "{ISO:Extended}")
+      datetime ->
+        Timex.format(datetime, "{ISO:Extended}")
     end
   end
 
@@ -80,13 +98,13 @@ defmodule Idfk.DateTime do
       iex> Idfk.to_iso8601!({{2016,4,6},{16,12,35}})
       "2016-04-06T16:12:35+00:00"
   """
-  @spec to_iso8601!(date_time) :: String.t
-  def to_iso8601!(date_time) when is_tuple(date_time) do
-    case to_iso8601(date_time) do
+  @spec to_iso8601!(datetime) :: String.t
+  def to_iso8601!(datetime) when is_tuple(datetime) do
+    case to_iso8601(datetime) do
       {:error, reason} ->
         raise reason
-      {:ok, date_time} ->
-        date_time
+      {:ok, datetime} ->
+        datetime
     end
   end
 end

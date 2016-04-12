@@ -5,6 +5,35 @@ defmodule Idfk.DateTimeSpec do
 
   subject do: Idfk.DateTime
 
+  context "#datetime_with_milliseconds" do
+    it "returns a tuple of integers" do
+      datetime = {{2016, 4, 12}, {19, 11, 51}}
+      timestamp = {1460, 488396, 730374}
+      result = subject.datetime_with_milliseconds(datetime, timestamp)
+      expect result |> to(eq {{2016, 4, 12}, {19, 11, 51, 730}})
+    end
+  end
+
+  context "#gregorian_seconds_to_posix_seconds" do
+    it "returns integer" do
+      gregorian = posix_epoch_in_seconds + 10
+      result    = subject.gregorian_seconds_to_posix_seconds(gregorian)
+      expect result |> to(eq 10)
+    end
+
+    it "raise error w/ invalid input" do
+      result    = fn -> subject.gregorian_seconds_to_posix_seconds("lol not an integer") end
+      expect result |> to(raise_exception)
+    end
+  end
+
+  context "#posix_epoch_in_seconds" do
+    it "equals 62167219200" do
+      result = subject.posix_epoch_in_seconds
+      expect result |> to(eq posix_epoch_in_seconds)
+    end
+  end
+
   context "#to_iso8601" do
     it "returns {:ok, string} w/ second precision" do
       date   = {{2016,4,6},{16,12,35}}
@@ -36,26 +65,6 @@ defmodule Idfk.DateTimeSpec do
       date   = {{2016,4,6},{16,12,35,"lol not an integer"}}
       result = fn -> subject.to_iso8601!(date) end
       expect result |> to(raise_exception)
-    end
-  end
-
-  context "#gregorian_to_posix" do
-    it "returns integer" do
-      gregorian = posix_epoch_in_seconds + 10
-      result    = subject.gregorian_to_posix(gregorian)
-      expect result |> to(eq 10)
-    end
-
-    it "raise error w/ invalid input" do
-      result    = fn -> subject.gregorian_to_posix("lol not an integer") end
-      expect result |> to(raise_exception)
-    end
-  end
-
-  context "#posix_epoch_in_seconds" do
-    it "equals 62167219200" do
-      result = subject.posix_epoch_in_seconds
-      expect result |> to(eq posix_epoch_in_seconds)
     end
   end
 end
