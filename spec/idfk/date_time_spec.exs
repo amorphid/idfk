@@ -16,6 +16,15 @@ defmodule Idfk.DateTimeSpec do
     end
   end
 
+  context "#datetime_with_milliseconds_to_datetime_with_seconds" do
+    it "drops seconds from datetime_with_milliseconds" do
+      with_milliseconds = {{2016, 4, 12}, {19, 11, 51, 730}}
+      result =
+        subject.datetime_with_milliseconds_to_datetime_with_seconds(with_milliseconds)
+      expect result |> to(eq {{2016, 4, 12}, {19, 11, 51}})
+    end
+  end
+
   context "#gregorian_seconds_to_posix_seconds" do
     it "returns integer" do
       gregorian = posix_epoch_in_seconds + 10

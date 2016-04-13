@@ -48,6 +48,17 @@ defmodule Idfk.DateTime do
   end
 
   @doc """
+  Drops milliseconds from datetime with millisecond precision
+
+      # this method name is kind of long...
+      iex> Idfk.DateTime.datetime_with_milliseconds_to_datetime_with_seconds({{2016, 4, 12}, {19, 11, 51, 730}})
+      {{2016, 4, 12}, {19, 11, 51}}
+  """
+  @spec datetime_with_milliseconds_to_datetime_with_seconds(datetime_millis_precision) :: datetime_second_precision
+  def datetime_with_milliseconds_to_datetime_with_seconds({{y,mon,d},{h,min,s,_mil}}) do
+    {{y,mon,d},{h,min,s}}
+  end
+  @doc """
   Converts an integer formatted datetime based on the Gregorian epoch of 1 Jan 0000 @ 12:00 a.m. to an integer formatted datetime based on the posix epoch of  1 Jan 1970 @ 12:00 a.m.
 
       iex> Idfk.posix_epoch_in_seconds(63627199062)

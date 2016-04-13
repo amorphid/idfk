@@ -14,7 +14,7 @@ defmodule Idfk.Mixfile do
       elixir:           "~> 1.2",
       package:          package,
       start_permanent:  Mix.env == :prod,
-      version:          "0.0.1"
+      version:          "0.1.0"
     ]
   end
 
